@@ -80,22 +80,7 @@ textarea{resize:vertical;min-height:88px}
 </style>
 </head>
 <body>
-<header>
-  <a class="brand-link" href="https://shhosting.net/" aria-label="shhosting.net home">
-    <img class="logo-icon theme-swap light" src="/assets/img/logo-icon-light.svg" alt="" aria-hidden="true">
-    <img class="logo-icon theme-swap dark" src="/assets/img/logo-icon-dark.svg" alt="" aria-hidden="true">
-    <img class="logo-wordmark theme-swap light" src="/assets/img/logo-wordmark-light.svg" alt="shhosting.net">
-    <img class="logo-wordmark theme-swap dark" src="/assets/img/logo-wordmark-dark.svg" alt="shhosting.net">
-  </a>
-  <nav class="site-nav" aria-label="Site navigation">
-    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Open navigation menu"><span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span></button>
-    <ul class="nav-menu" id="navMenu">
-      <li><a href="https://shhosting.net/">Home</a></li>
-      <li><a href="https://shhosting.net/#tools">Tools</a></li>
-      <li><a href="https://github.com/shhosting">GitHub</a></li>
-    </ul>
-  </nav>
-</header>
+
 <main class="morse-main">
   <div class="morse-head"><h1>Morse Code Trainer</h1><p>Learn the code, hear the rhythm, and follow every dot and dash through the interactive Morse tree.</p></div>
   <p class="local-note">Runs locally · Nothing uploaded</p>
@@ -109,7 +94,7 @@ textarea{resize:vertical;min-height:88px}
       <div>
         <h2 id="tree-heading">Interactive Morse tree</h2>
         <p class="muted">Choose a character or send dots and dashes to illuminate its path from START.</p>
-        <div class="tree-wrap"><svg id="treeSvg" viewBox="0 0 620 450" role="img" aria-label="Interactive International Morse code decision tree"></svg></div>
+        <div class="tree-wrap"><svg id="treeSvg" viewBox="0 0 620 580" role="img" aria-label="Interactive International Morse code decision tree"></svg></div>
         <div class="tree-help"><span><i class="legend-dot"></i> Active path</span><span>Dot = left branch</span><span>Dash = right branch</span></div>
       </div>
       <aside class="readout" aria-live="polite">
@@ -157,21 +142,7 @@ textarea{resize:vertical;min-height:88px}
     <p class="muted" id="saveStatus" aria-live="polite">Settings and scores are saved in this browser only.</p>
   </section>
 </main>
-<footer class="site-footer">
-  <div class="footer-credit">
-    <span class="footer-group">© 2026 shhosting.net</span><span aria-hidden="true">·</span>
-    <span class="footer-group"><a href="mailto:contact@shhosting.net">contact@shhosting.net</a></span><span aria-hidden="true">·</span>
-    <span class="footer-group">Hosted on GitHub Pages</span><span aria-hidden="true">·</span>
-    <span class="footer-group">Built with various <button id="ai-tools-trigger" class="ai-tools-trigger" type="button" aria-expanded="false" aria-controls="ai-tools-popover">AI tools</button></span>
-  </div>
-  <div id="ai-tools-popover" class="ai-tools-popover" hidden>
-    <a class="ai-tools-link" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer"><span class="ai-tools-name"><strong>ChatGPT</strong> — OpenAI</span><span aria-hidden="true">↗</span></a>
-    <a class="ai-tools-link" href="https://claude.ai/" target="_blank" rel="noopener noreferrer"><span class="ai-tools-name"><strong>Claude</strong> — Anthropic</span><span aria-hidden="true">↗</span></a>
-    <a class="ai-tools-link" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer"><span class="ai-tools-name"><strong>Gemini</strong> — Google</span><span aria-hidden="true">↗</span></a>
-    <a class="ai-tools-link" href="https://lumo.proton.me/" target="_blank" rel="noopener noreferrer"><span class="ai-tools-name"><strong>Lumo</strong> — Proton</span><span aria-hidden="true">↗</span></a>
-  </div>
-  <p style="margin:5px 0 0;font-size:.8rem">This tool’s code is open source <span aria-hidden="true">•</span> v1.0.0</p>
-</footer>
+
 <script src="/assets/js/site-shell.js" defer></script>
 <script>
 (function(){
@@ -210,7 +181,7 @@ function buildTree(){
  const root=make('circle',{cx:310,cy:52,r:17,class:'tree-start'});make('text',{x:310,y:52,class:'tree-start-text'},'START');
  nodes.filter(n=>n.seq).forEach(n=>{const g=make('g',{class:'tree-node-group','data-seq':n.seq});make('circle',{cx:n.x,cy:n.y,r:12,class:'tree-node','data-seq':n.seq});if(n.ch){const t=make('text',{x:n.x,y:n.y+29,class:'tree-label','data-char':n.ch},n.ch);g.append(t);}});
  // Full character list remains selectable even where the compact tree can't label every branch.
- CHARSET.forEach((ch,i)=>{const col=i%10,row=Math.floor(i/10),x=26+col*63,y=408+row*24;const g=make('g',{class:'tree-char','data-char':ch,tabindex:'0',role:'button','aria-label':ch+' '+MORSE[ch]});make('rect',{x:x-18,y:y-10,width:36,height:20,rx:5});make('text',{x,y:y+1},ch);g.addEventListener('click',()=>selectCharacter(ch));g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectCharacter(ch);}});});
+ CHARSET.forEach((ch,i)=>{const col=i%10,row=Math.floor(i/10),x=26+col*63,y=470+row*24;const g=make('g',{class:'tree-char','data-char':ch,tabindex:'0',role:'button','aria-label':ch+' '+MORSE[ch]});make('rect',{x:x-18,y:y-10,width:36,height:20,rx:5});make('text',{x,y:y+1},ch);g.addEventListener('click',()=>selectCharacter(ch));g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectCharacter(ch);}});});
  svg.querySelectorAll('.tree-node-group').forEach(g=>{const seq=g.getAttribute('data-seq'),ch=decode(seq);if(ch){g.addEventListener('click',()=>selectCharacter(ch));g.style.cursor='pointer';}});
 }
 function renderTree(seq,selected){$('treeSvg').querySelectorAll('.tree-edge').forEach(n=>n.classList.toggle('active',!!seq&&seq.startsWith(n.getAttribute('data-seq'))));$('treeSvg').querySelectorAll('.tree-node').forEach(n=>n.classList.toggle('active',!!seq&&seq.startsWith(n.getAttribute('data-seq'))));$('treeSvg').querySelectorAll('.tree-label').forEach(n=>n.classList.toggle('active',!!selected&&n.getAttribute('data-char')===selected));$('treeSvg').querySelectorAll('.tree-char').forEach(n=>n.classList.toggle('active',!!selected&&n.getAttribute('data-char')===selected));}
